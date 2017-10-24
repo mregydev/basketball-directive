@@ -1,0 +1,34 @@
+<script src="angular.min.js"></script>
+<script src="phaser.min.js"></script>
+<script src="game.js"></script>
+
+<link href="style.css" type="text/css" rel="stylesheet"/>
+
+<div id="test" ng-app="testApp" ng-controller="myController" class="center">
+    <basket-ball players="players" can-play="canPlay" x="x" y="y" players="players" cuurentturn="currentTurn" ></basket-ball>
+     <input type="checkbox" ng-model="canPlay"></input> Can Play
+    <input type="text" ng-model="currentTurn"></input>
+</div>
+
+
+
+<script>
+    angular.module("testApp", ["basketmodule"]).controller("myController",($scope)=>
+    {
+        $scope.players=[{Name:"yehia",isMainPlayer:true},{Name:"alaa",isMainPlayer:false}];
+        $scope.canPlay=true;
+        $scope.currentTurn=1;
+        $scope.x=0;
+        $scope.y=0;
+
+        $scope.$on("turnend",(event,data)=>
+        {
+            $scope.$apply(()=>
+            {
+ $scope.currentTurn=1-$scope.currentTurn;
+            });
+           
+        });
+    });
+</script>
+
